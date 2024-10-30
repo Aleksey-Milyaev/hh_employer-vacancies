@@ -48,7 +48,7 @@ class DBManager(Manager):
         cursor.execute("SELECT company_name, open_vacancies FROM employers")
         rows = cursor.fetchall()
         for row in rows:
-            print(row)
+            print(' '.join([str(x) for x in list(row)]))
         cursor.close()
         conn.close()
 
@@ -57,10 +57,10 @@ class DBManager(Manager):
         вакансию."""
         conn = psycopg2.connect(dbname="employers_vacancy", **self.params)
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM vacancy")
+        cursor.execute("SELECT * FROM vacancy INNER JOIN employers ON vacancy.employee_id = employers.employee_id")
         rows = cursor.fetchall()
         for row in rows:
-            print(row)
+            print(' '.join([str(x) for x in list(row)]))
         cursor.close()
         conn.close()
 
@@ -81,7 +81,7 @@ class DBManager(Manager):
         cursor.execute("SELECT * FROM vacancy WHERE salary_from > (SELECT AVG(salary_from) FROM vacancy)")
         rows = cursor.fetchall()
         for row in rows:
-            print(row)
+            print(' '.join([str(x) for x in list(row)]))
         cursor.close()
         conn.close()
 
@@ -99,6 +99,6 @@ class DBManager(Manager):
             print("Ваш запрос не дал результата, попробуйте ввести: 'врач' или 'оператор'.")
         else:
             for item in result:
-                print(item)
+                print(' '.join([str(x) for x in list(row)]))
         cursor.close()
         conn.close()

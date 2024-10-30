@@ -24,8 +24,8 @@ class EmployerInformation(HHEmployee):
     def get_employee_information(self) -> None:
         """Функция получения информации работодателя"""
         try:
-            response = requests.get(url=self.url).text
-            information = json.loads(response)
+            response = requests.get(url=self.url)
+            information = response.json()
             information_set = (
                 information["id"],
                 information["name"],

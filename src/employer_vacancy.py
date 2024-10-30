@@ -26,8 +26,8 @@ class EmployerVacancy(HHVacancy):
     def get_employer_vacancy(self) -> None:
         """Функция получения вакансий"""
         try:
-            response = requests.get(url=self.url, headers=self.headers, params=self.params).text
-            vacancy = json.loads(response)["items"]
+            response = requests.get(url=self.url, headers=self.headers, params=self.params)
+            vacancy = response.json()["items"]
             for item in vacancy:
                 vacancy_info = (
                     item["id"],
