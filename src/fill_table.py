@@ -43,7 +43,6 @@ class FillTableEV(FillTable):
             "CREATE TABLE vacancy(vacancy_id CHAR(9) PRIMARY KEY NOT NULL, vacancy_name VARCHAR(100)"
             "NOT NULL,url VARCHAR(100), salary_from INT, salary_to INT, employee_id "
             "SERIAL NOT NULL, company_name VARCHAR(100));"
-
         )
         conn.commit()
         for row in self.vacation_employer:

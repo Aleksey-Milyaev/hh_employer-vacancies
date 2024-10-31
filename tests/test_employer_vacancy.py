@@ -5,10 +5,12 @@ from unittest.mock import patch, MagicMock
 
 @pytest.fixture
 def get_employer():
+    """ Создание тестового класса """
     return EmployerVacancy(123456)
 
 
 def test_employer_vacation_init(get_employer):
+    """Тест инициализации"""
     assert get_employer.url == "https://api.hh.ru/vacancies"
     assert get_employer.params == {"employer_id": 123456, "page": 0, "per_page": 100}
     assert get_employer.headers == {"User-Agent": "HH-User-Agent"}
@@ -16,6 +18,7 @@ def test_employer_vacation_init(get_employer):
 
 @patch("requests.get")
 def test_get_employee_vacation(mock_get, get_employer):
+    """Тест получения данных по api"""
     mock_response = MagicMock()
     mock_response.json.return_value = {'items': [{'id': '108858682',  'name': 'Web-программист - стажер',  'area':
         {'url': 'https://api.hh.ru/areas/160'}, 'salary': None, 'employer': {'id': '5031522', 'name': 'Autodata'}}]}
